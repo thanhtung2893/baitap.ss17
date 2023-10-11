@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class User {
+            constructor(name, email, address, phone) {
+                this.name = name;
+                this.email = email;
+                this.address = address;
+                this.phone = phone;
+                this.role = 0; 
+            }
+        }
+
+        class Admin extends User {
+            constructor(name, email, address, phone) {
+                super(name, email, address, phone);
+                this.role = 1; 
+            }
+        }
+
+     
+        let userList = [];
+
+        // Thêm vào 3 user và 1 admin vào danh sách người dùng
+        userList.push(new User("User 1", "user1@xxxxxxx.com", "Address 1", "123456789"));
+        userList.push(new User("User 2", "user1@yyyyyyy.com", "Address 2", "987654321"));
+        userList.push(new User("User 3", "user3@xxxxxxx.com", "Address 3", "456123789"));
+        userList.push(new Admin("Admin 1", "admin1@yyyyyy.com", "Address 4", "789123456"));
+
+        // Xóa người dùng thông qua tên của họ (không xóa được admin)
+        function deleteUserByName(name) {
+            userList = userList.filter(user => user.name !== name);
+        }
+
+        deleteUserByName("User 1"); // Xóa người dùng có tên là "User 1"
+
+        // Sửa thông tin người dùng thông qua id (không sửa được thông tin admin)
+        function updateUserById(id, updatedInfo) {
+            if (id >= 0 && id < userList.length && !(userList[id] instanceof Admin)) {
+                Object.assign(userList[id], updatedInfo);
+            }
+        }
+
+        updateUserById(1, { name: "Updated User 2", address: "Updated Address 2" }); // Sửa thông tin người dùng có id là 1
+
+        // Thêm 1 nick admin vào danh sách người dùng
+        userList.push(new Admin("Admin 2", "admin2@example.com", "Address 5", "987654321"));
+
+        // Tìm kiếm toàn bộ thông tin các tài khoản là admin và in ra
+        let admins = userList.filter(user => user.role === 1);
+
+        console.log(admins); // In danh sách các tài khoản admin
+    </script>
+</body>
+
+</html>

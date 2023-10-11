@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let courses = [
+            { name: "HTML",                         status: "completed :false" },
+            { name: "CSS",                          status: "completed :false" },
+            { name: "Basic of JavaScript",          status: "completed :false" },
+            { name: "Node Package Manager (npm)",   status: "completed :false" },
+            { name: "Git",                          status: "completed :false" }
+        ];
+
+        function printCourses() {
+            console.log("Các khóa học:");
+            for (let i = 0; i < courses.length; i++) {
+                console.log(`${i + 1}. ${courses[i].name} - ${courses[i].status}`);
+            }
+        }
+
+        function addCourse() {
+            let newName = prompt("Nhập tên khóa học mới:");
+            let newStatus = prompt("Nhập trạng thái hoàn thành:");
+            courses.push({ name: newName, status: newStatus });
+            printCourses();
+        }
+
+        function updateCourse() {
+            let position = parseInt(prompt("Nhập vị trí muốn update:")) - 1;
+            if (position >= 0 && position < courses.length) {
+                let newName = prompt("Nhập tên mới:");
+                let newStatus = prompt("Nhập trạng thái mới:");
+                courses[position].name = newName;
+                courses[position].status = newStatus;
+                printCourses();
+            } else {
+                console.log("Vị trí không tồn tại!");
+            }
+        }
+
+        function deleteCourse() {
+            let position = parseInt(prompt("Nhập vị trí muốn xóa:")) - 1;
+            if (position >= 0 && position < courses.length) {
+                courses.splice(position, 1);
+                printCourses();
+            } else {
+                console.log("Vị trí không tồn tại!");
+            }
+        }
+
+        function main() {
+            let chon = "";
+            while (chon !== "E") {
+                choice = prompt("Nhập lựa chọn (C/R/U/D/E):");
+                switch (chon) {
+                    case "C":
+                        addCourse();
+                        break;
+                    case "R":
+                        printCourses();
+                        break;
+                    case "U":
+                        updateCourse();
+                        break;
+                    case "D":
+                        deleteCourse();
+                        break;
+                    case "E":
+                        console.log("Cảm ơn bạn đã đến với Rikkei Academy");
+                        break;
+                    default:
+                        console.log("Lựa chọn không hợp lệ!");
+                        break;
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
